@@ -3,6 +3,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
 #include "nvs_flash.h"
 #include "esp_partition.h"
 
@@ -14,6 +17,14 @@
 #include "esp_bt_defs.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
+
+#define DELAY_IN_S 4
+
+// Overwrite this with the generate_keypairs.py output
+static uint8_t public_keys[][28] = {
+    {0x15, 0xfc, 0x71, 0x89, 0x3d, 0x8c, 0x37, 0x4c, 0x45, 0x1b, 0xad, 0xcb, 0xc9, 0x13, 0xc8, 0x91, 0xde, 0x95, 0x23, 0xe1, 0x60, 0x7, 0xe0, 0x18, 0x33, 0x8, 0xe0, 0xa6},
+    {0xd5, 0xd9, 0xe9, 0xb3, 0x87, 0xab, 0x79, 0x7b, 0x3f, 0xb8, 0xf8, 0x6d, 0x10, 0x9e, 0x47, 0x65, 0x98, 0x8e, 0x36, 0x81, 0x3b, 0x36, 0xde, 0x3a, 0x60, 0xd1, 0xe1, 0x1d}
+};
 
 static const char* LOG_TAG = "open_haystack";
 
@@ -37,18 +48,19 @@ static uint8_t adv_data[31] = {
 	0x00, /* Hint (0x00) */
 };
 
+
 /* https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_gap_ble.html#_CPPv420esp_ble_adv_params_t */
 static esp_ble_adv_params_t ble_adv_params = {
     // Advertising min interval:
     // Minimum advertising interval for undirected and low duty cycle
     // directed advertising. Range: 0x0020 to 0x4000 Default: N = 0x0800
     // (1.28 second) Time = N * 0.625 msec Time Range: 20 ms to 10.24 sec
-    .adv_int_min        = 0x0640, // 1s
+    .adv_int_min        = 0x3000, 
     // Advertising max interval:
     // Maximum advertising interval for undirected and low duty cycle
     // directed advertising. Range: 0x0020 to 0x4000 Default: N = 0x0800
     // (1.28 second) Time = N * 0.625 msec Time Range: 20 ms to 10.24 sec
-    .adv_int_max        = 0x0C80, // 2s
+    .adv_int_max        = 0x4000,
     // Advertisement type
     .adv_type           = ADV_TYPE_NONCONN_IND,
     // Use the random address
@@ -90,20 +102,6 @@ static void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *par
     }
 }
 
-int load_key(uint8_t *dst, size_t size) {
-    const esp_partition_t *keypart = esp_partition_find_first(0x40, 0x00, "key");
-    if (keypart == NULL) {
-        ESP_LOGE(LOG_TAG, "Could not find key partition");
-        return 1;
-    }
-    esp_err_t status;
-    status = esp_partition_read(keypart, 0, dst, size);
-    if (status != ESP_OK) {
-        ESP_LOGE(LOG_TAG, "Could not read key from partition: %s", esp_err_to_name(status));
-    }
-    return status;
-}
-
 void set_addr_from_key(esp_bd_addr_t addr, uint8_t *public_key) {
 	addr[0] = public_key[0] | 0b11000000;
 	addr[1] = public_key[1];
@@ -131,32 +129,37 @@ void app_main(void)
     esp_bluedroid_init();
     esp_bluedroid_enable();
 
-    // Load the public key from the key partition
-    static uint8_t public_key[28];
-    if (load_key(public_key, sizeof(public_key)) != ESP_OK) {
-        ESP_LOGE(LOG_TAG, "Could not read the key, stopping.");
-        return;
-    }
-
-    set_addr_from_key(rnd_addr, public_key);
-    set_payload_from_key(adv_data, public_key);
-
-    ESP_LOGI(LOG_TAG, "using device address: %02x %02x %02x %02x %02x %02x", rnd_addr[0], rnd_addr[1], rnd_addr[2], rnd_addr[3], rnd_addr[4], rnd_addr[5]);
-
-    esp_err_t status;
-    //register the scan callback function to the gap module
-    if ((status = esp_ble_gap_register_callback(esp_gap_cb)) != ESP_OK) {
-        ESP_LOGE(LOG_TAG, "gap register error: %s", esp_err_to_name(status));
-        return;
-    }
-
-    if ((status = esp_ble_gap_set_rand_addr(rnd_addr)) != ESP_OK) {
-        ESP_LOGE(LOG_TAG, "couldn't set random address: %s", esp_err_to_name(status));
-        return;
-    }
-    if ((esp_ble_gap_config_adv_data_raw((uint8_t*)&adv_data, sizeof(adv_data))) != ESP_OK) {
-        ESP_LOGE(LOG_TAG, "couldn't configure BLE adv: %s", esp_err_to_name(status));
-        return;
-    }
     ESP_LOGI(LOG_TAG, "application initialized");
+
+    uint8_t* public_key;
+    uint key_index = 0;
+    while(true) {
+        esp_err_t status;
+
+	public_key = public_keys[key_index];
+        set_addr_from_key(rnd_addr, public_key);
+        set_payload_from_key(adv_data, public_key);
+
+        ESP_LOGI(LOG_TAG, "using device address: %02x %02x %02x %02x %02x %02x", rnd_addr[0], rnd_addr[1], rnd_addr[2], rnd_addr[3], rnd_addr[4], rnd_addr[5]);
+        //register the scan callback function to the gap module
+        if ((status = esp_ble_gap_register_callback(esp_gap_cb)) != ESP_OK) {
+            ESP_LOGE(LOG_TAG, "gap register error: %s", esp_err_to_name(status));
+            return;
+        }
+    
+        if ((status = esp_ble_gap_set_rand_addr(rnd_addr)) != ESP_OK) {
+            ESP_LOGE(LOG_TAG, "couldn't set random address: %s", esp_err_to_name(status));
+            return;
+        }
+        if ((esp_ble_gap_config_adv_data_raw((uint8_t*)&adv_data, sizeof(adv_data))) != ESP_OK) {
+            ESP_LOGE(LOG_TAG, "couldn't configure BLE adv: %s", esp_err_to_name(status));
+            return;
+        }
+	ESP_LOGI(LOG_TAG, "Sending beacon (with key index %d)", key_index);
+        vTaskDelay(10);
+	esp_ble_gap_stop_advertising(); // Stop immediately after first beacon
+	vTaskDelay(DELAY_IN_S * 100); // pause after the public key has been broadcasted once
+	ESP_LOGI(LOG_TAG, "Woke up from sleep");
+	key_index = (key_index + 1) % (sizeof(public_keys)/sizeof(public_keys[0]));
+    }   
 }

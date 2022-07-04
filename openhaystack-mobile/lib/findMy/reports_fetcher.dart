@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:pointycastle/api.dart';
 
 class ReportsFetcher {
-  static const _seemooEndpoint = "http://192.168.1.168/getAndDecryptReports"
+  static const _seemooEndpoint = "http://192.168.1.168/getAndDecryptReports";
 
   /// Fetches the location reports corresponding to the given hashed advertisement
   /// key.
