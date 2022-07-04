@@ -37,17 +37,16 @@ public class AnisetteDataManager: NSObject {
         let requestUUID = UUID().uuidString
         self.anisetteDataCompletionHandlers[requestUUID] = completion
 
-        let timer = Timer(timeInterval: 1.0, repeats: false) { (_) in
-            self.finishRequest(forUUID: requestUUID, result: .failure(AnisetteDataError.pluginNotFound))
-        }
-        self.anisetteDataTimers[requestUUID] = timer
-
-        RunLoop.main.add(timer, forMode: .default)
-
         DistributedNotificationCenter.default()
             .postNotificationName(
                 Notification.Name("de.tu-darmstadt.seemoo.OpenHaystack.FetchAnisetteData"),
                 object: nil, userInfo: ["requestUUID": requestUUID], options: .deliverImmediately)
+        
+        let timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { _ in
+            self.finishRequest(forUUID: requestUUID, result: .failure(AnisetteDataError.pluginNotFound))
+        }
+        
+        self.anisetteDataTimers[requestUUID] = timer
     }
 
     func requestAnisetteDataAuthKit() -> AppleAccountData? {

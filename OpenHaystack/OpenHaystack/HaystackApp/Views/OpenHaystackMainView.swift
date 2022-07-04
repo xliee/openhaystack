@@ -160,6 +160,13 @@ struct OpenHaystackMainView: View {
                 content: {
                     self.mailStatePopover
                 })
+            Button(
+                action: {
+                    self.exportReports()
+                }, label: {
+                    Text("Button")
+                }
+            )
         }
     }
 
@@ -292,6 +299,41 @@ struct OpenHaystackMainView: View {
         }
     }
 
+    
+    func exportReports() {
+        guard let accessory = self.focusedAccessory,
+            let reports = accessory.locations,
+            let reportsData = try? PropertyListEncoder().encode(reports)
+        else { return }
+
+        let sortedReports = reports.sorted(by: { $0.timestamp ?? Date() < $1.timestamp ?? Date() })
+
+        let startDate = sortedReports.first?.timestamp ?? Date()
+        let endDate = sortedReports.last?.timestamp ?? Date()
+        let df = DateFormatter()
+        df.dateFormat = "dd.MM.yy"
+
+        let savePanel = NSSavePanel()
+        savePanel.allowedFileTypes = ["plist"]
+        savePanel.canCreateDirectories = true
+        savePanel.directoryURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        savePanel.message = "Export all recent locations for this accessory"
+        savePanel.nameFieldLabel = "Filename"
+        savePanel.nameFieldStringValue = "\(accessory.name)_\(df.string(from: startDate))-\(df.string(from: endDate)).plist"
+        savePanel.prompt = "Export"
+        savePanel.title = "Export accessories & keys"
+
+        let result = savePanel.runModal()
+
+        if result == .OK,
+            let url = savePanel.url
+        {
+            // Store the accessory file
+            try? reportsData.write(to: url)
+        }
+
+    }
+    
     // MARK: - Alerts
 
     // swiftlint:disable function_body_length

@@ -77,10 +77,13 @@ struct DecryptReports {
         var accuracy: UInt8 = 0
         _ = withUnsafeMutableBytes(of: &accuracy, { content.subdata(in: 8..<9).copyBytes(to: $0) })
 
+        var status: UInt8 = 0
+        _ = withUnsafeMutableBytes(of: &status, { content.subdata(in: 9..<10).copyBytes(to: $0) })
+        
         let latitudeDec = Double(latitude) / 10000000.0
         let longitudeDec = Double(longitude) / 10000000.0
 
-        return FindMyLocationReport(lat: latitudeDec, lng: longitudeDec, acc: accuracy, dP: report.datePublished, t: report.timestamp, c: report.confidence)
+        return FindMyLocationReport(lat: latitudeDec, lng: longitudeDec, acc: accuracy, dP: report.datePublished, t: report.timestamp, c: report.confidence, s: status)
     }
 
     static func kdf(fromSharedSecret secret: Data, andEphemeralKey ephKey: Data) -> Data {

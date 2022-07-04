@@ -7,10 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A2C9089273425720044407E /* NRF in Resources */ = {isa = PBXBuildFile; fileRef = 5A2C9088273425720044407E /* NRF */; };
-		5A2C908B2734266A0044407E /* DataToHexExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C908A2734266A0044407E /* DataToHexExtension.swift */; };
-		5A2C908D273429360044407E /* NRFController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C908C273429360044407E /* NRFController.swift */; };
-		5A2C908F273429540044407E /* NRFInstallSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C908E273429540044407E /* NRFInstallSheet.swift */; };
+		1441B5B1287254AB004593A5 /* BoringSSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 024D98482490CE320063EBB6 /* BoringSSL.m */; };
+		1441B5B9287254F5004593A5 /* FindMyKeyDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7867874724A651C600199B09 /* FindMyKeyDecoder.swift */; };
+		1441B5C1287254FD004593A5 /* DecryptReports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025DFEDB248FED250039C718 /* DecryptReports.swift */; };
+		1441B5D028725548004593A5 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78108B8E248F70D40007E9C4 /* Models.swift */; };
+		148DB35228730C1A00A2426B /* NRFInstallSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148DB35028730C1A00A2426B /* NRFInstallSheet.swift */; };
+		148DB36428730C4400A2426B /* DataToHexExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148DB36228730C4400A2426B /* DataToHexExtension.swift */; };
+		148DB36E28730C8000A2426B /* NRFController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148DB36C28730C8000A2426B /* NRFController.swift */; };
+		148DB36F28730C8000A2426B /* UpdateCheckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148DB36D28730C8000A2426B /* UpdateCheckController.swift */; };
+		148DB39128730D0000A2426B /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148DB38F28730D0000A2426B /* Advertisement.swift */; };
+		148DB39228730D0000A2426B /* BluetoothAccessoryScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148DB39028730D0000A2426B /* BluetoothAccessoryScanner.swift */; };
+		148DB3CA28732E7000A2426B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148DB3C928732E7000A2426B /* main.swift */; };
+		1494972728725289009F9186 /* ServerReportsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1494972328725288009F9186 /* ServerReportsFetcher.swift */; };
+		1494972A28725289009F9186 /* HTTPBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1494972628725289009F9186 /* HTTPBody.swift */; };
+		14949733287252CD009F9186 /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = 14949732287252CD009F9186 /* Crypto */; };
+		14949735287252D4009F9186 /* NIOSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 14949734287252D4009F9186 /* NIOSSL */; };
 		78014A2925DC08580089F6D9 /* MicrobitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78014A2725DC01220089F6D9 /* MicrobitController.swift */; };
 		78014A2B25DC22120089F6D9 /* sample.bin in Resources */ = {isa = PBXBuildFile; fileRef = 78014A2A25DC22110089F6D9 /* sample.bin */; };
 		78014A2F25DC2F100089F6D9 /* pattern_sample.bin in Resources */ = {isa = PBXBuildFile; fileRef = 78014A2E25DC2F100089F6D9 /* pattern_sample.bin */; };
@@ -33,8 +44,18 @@
 		781EB43125DADF2B00FEAA19 /* AnisetteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781EB40F25DADB0600FEAA19 /* AnisetteDataManager.swift */; };
 		7821DAD125F7B2C10054DC33 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821DAD025F7B2C10054DC33 /* FileManager.swift */; };
 		7821DAD325F7C39A0054DC33 /* ESP32InstallSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821DAD225F7C39A0054DC33 /* ESP32InstallSheet.swift */; };
-		782853C22755103A00B18EDE /* UpdateCheckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782853C12755103A00B18EDE /* UpdateCheckController.swift */; };
-		782853C427551B4400B18EDE /* UpdateCheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782853C327551B4400B18EDE /* UpdateCheckTests.swift */; };
+		7822D3642739337F0031B006 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7822D3632739337F0031B006 /* AppDelegate.swift */; };
+		7822D3662739337F0031B006 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7822D3652739337F0031B006 /* ViewController.swift */; };
+		7822D368273933800031B006 /* ServerAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7822D367273933800031B006 /* ServerAssets.xcassets */; };
+		7822D370273933940031B006 /* ServerReportsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782578842628388F00B8B953 /* ServerReportsFetcher.swift */; };
+		7822D371273933940031B006 /* HTTPBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782578822628380200B8B953 /* HTTPBody.swift */; };
+		7822D37527393BAE0031B006 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 7822D37427393BAE0031B006 /* Vapor */; };
+		7822D37627393BBE0031B006 /* AnisetteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781EB40F25DADB0600FEAA19 /* AnisetteDataManager.swift */; };
+		7825787B2628365600B8B953 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7825787A2628365600B8B953 /* main.swift */; };
+		78257881262836D400B8B953 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 78257880262836D400B8B953 /* Vapor */; };
+		7825788726283BAF00B8B953 /* AnisetteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781EB40F25DADB0600FEAA19 /* AnisetteDataManager.swift */; };
+		782578882628406700B8B953 /* AppleAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 78286D2925E3EC3200F65511 /* AppleAccountData.m */; };
+		782578892628406A00B8B953 /* ALTAnisetteData.m in Sources */ = {isa = PBXBuildFile; fileRef = 78286CB025E3ACE700F65511 /* ALTAnisetteData.m */; };
 		78286CB225E3ACE700F65511 /* OpenHaystackPluginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 78286CAF25E3ACE700F65511 /* OpenHaystackPluginService.m */; };
 		78286D1F25E3D8B800F65511 /* ALTAnisetteData.m in Sources */ = {isa = PBXBuildFile; fileRef = 78286CB025E3ACE700F65511 /* ALTAnisetteData.m */; };
 		78286D2A25E3EC3200F65511 /* AppleAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 78286D2925E3EC3200F65511 /* AppleAccountData.m */; };
@@ -52,6 +73,16 @@
 		7899D1D625DE74EE00115740 /* firmware.bin in Resources */ = {isa = PBXBuildFile; fileRef = 7899D1D525DE74EE00115740 /* firmware.bin */; };
 		7899D1E125DE97E200115740 /* IconSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7899D1E025DE97E200115740 /* IconSelectionView.swift */; };
 		7899D1E925DEBF4900115740 /* AccessoryMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7899D1E825DEBF4800115740 /* AccessoryMapAnnotation.swift */; };
+		78A55404262882F100B00856 /* ReportsFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 78108B84248E8FDD0007E9C4 /* ReportsFetcher.m */; };
+		78BAB61227393BEA009D82B6 /* ReportsFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 78108B84248E8FDD0007E9C4 /* ReportsFetcher.m */; };
+		78BAB61327393CB3009D82B6 /* ALTAnisetteData.m in Sources */ = {isa = PBXBuildFile; fileRef = 78286CB025E3ACE700F65511 /* ALTAnisetteData.m */; };
+		78BAB61427393CB7009D82B6 /* AppleAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 78286D2925E3EC3200F65511 /* AppleAccountData.m */; };
+		78CDFF4C2757CFEF008553FA /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78108B8E248F70D40007E9C4 /* Models.swift */; };
+		78CDFF4D2757CFF9008553FA /* DecryptReports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025DFEDB248FED250039C718 /* DecryptReports.swift */; };
+		78CDFF4E2757CFFC008553FA /* FindMyKeyDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7867874724A651C600199B09 /* FindMyKeyDecoder.swift */; };
+		78CDFF532757D515008553FA /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = 78CDFF522757D515008553FA /* Crypto */; };
+		78CDFF552757D567008553FA /* NIOSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 78CDFF542757D567008553FA /* NIOSSL */; };
+		78CDFF562757D5C2008553FA /* BoringSSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 024D98482490CE320063EBB6 /* BoringSSL.m */; };
 		78D9B80625F7CF60009B9CE8 /* ManageAccessoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9B80525F7CF60009B9CE8 /* ManageAccessoriesView.swift */; };
 		78EC226425DAE0BE0042B775 /* OpenHaystackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EC226325DAE0BE0042B775 /* OpenHaystackTests.swift */; };
 		78EC226C25DBC2E40042B775 /* OpenHaystackMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EC226B25DBC2E40042B775 /* OpenHaystackMainView.swift */; };
@@ -59,8 +90,6 @@
 		78EC227725DBDB7E0042B775 /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EC227625DBDB7E0042B775 /* KeychainController.swift */; };
 		78F8BB4C261C50EB00D9F37F /* LargeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F8BB4B261C50EB00D9F37F /* LargeButtonStyle.swift */; };
 		F126102F2600D1D80066A859 /* Slider+LogScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126102E2600D1D80066A859 /* Slider+LogScale.swift */; };
-		F12D5A5A25FA4F3500CBBA09 /* BluetoothAccessoryScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12D5A5925FA4F3500CBBA09 /* BluetoothAccessoryScanner.swift */; };
-		F12D5A6025FA79FA00CBBA09 /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12D5A5F25FA79FA00CBBA09 /* Advertisement.swift */; };
 		F1647C1625FF6C61004144D6 /* BluetoothTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1647C1525FF6C61004144D6 /* BluetoothTests.swift */; };
 		F1647C1B25FF7954004144D6 /* AccessoryNearbyMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1647C1A25FF7954004144D6 /* AccessoryNearbyMonitor.swift */; };
 		F16BA9E925E7DB2D00238183 /* NIOSSL in Frameworks */ = {isa = PBXBuildFile; productRef = F16BA9E825E7DB2D00238183 /* NIOSSL */; };
@@ -84,6 +113,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		782578762628365600B8B953 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		78286CD825E3AF6900F65511 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -114,10 +152,15 @@
 		025DFEDB248FED250039C718 /* DecryptReports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecryptReports.swift; sourceTree = "<group>"; };
 		0298C0C8248F9506003928FE /* AuthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthKit.framework; path = ../../../../../../../../../../System/Library/PrivateFrameworks/AuthKit.framework; sourceTree = "<group>"; };
 		116B4EEC24A913AA007BA636 /* SavePanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePanel.swift; sourceTree = "<group>"; };
-		5A2C9088273425720044407E /* NRF */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NRF; sourceTree = "<group>"; };
-		5A2C908A2734266A0044407E /* DataToHexExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataToHexExtension.swift; sourceTree = "<group>"; };
-		5A2C908C273429360044407E /* NRFController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NRFController.swift; sourceTree = "<group>"; };
-		5A2C908E273429540044407E /* NRFInstallSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NRFInstallSheet.swift; sourceTree = "<group>"; };
+		148DB35028730C1A00A2426B /* NRFInstallSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NRFInstallSheet.swift; path = Views/NRFInstallSheet.swift; sourceTree = "<group>"; };
+		148DB36228730C4400A2426B /* DataToHexExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataToHexExtension.swift; sourceTree = "<group>"; };
+		148DB36C28730C8000A2426B /* NRFController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NRFController.swift; sourceTree = "<group>"; };
+		148DB36D28730C8000A2426B /* UpdateCheckController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateCheckController.swift; sourceTree = "<group>"; };
+		148DB38F28730D0000A2426B /* Advertisement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Advertisement.swift; sourceTree = "<group>"; };
+		148DB39028730D0000A2426B /* BluetoothAccessoryScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothAccessoryScanner.swift; sourceTree = "<group>"; };
+		148DB3C928732E7000A2426B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		1494972328725288009F9186 /* ServerReportsFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerReportsFetcher.swift; sourceTree = "<group>"; };
+		1494972628725289009F9186 /* HTTPBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPBody.swift; sourceTree = "<group>"; };
 		78014A2725DC01220089F6D9 /* MicrobitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrobitController.swift; sourceTree = "<group>"; };
 		78014A2A25DC22110089F6D9 /* sample.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = sample.bin; sourceTree = "<group>"; };
 		78014A2E25DC2F100089F6D9 /* pattern_sample.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = pattern_sample.bin; sourceTree = "<group>"; };
@@ -137,8 +180,17 @@
 		781EB40F25DADB0600FEAA19 /* AnisetteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnisetteDataManager.swift; sourceTree = "<group>"; };
 		7821DAD025F7B2C10054DC33 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		7821DAD225F7C39A0054DC33 /* ESP32InstallSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESP32InstallSheet.swift; sourceTree = "<group>"; };
-		782853C12755103A00B18EDE /* UpdateCheckController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheckController.swift; sourceTree = "<group>"; };
-		782853C327551B4400B18EDE /* UpdateCheckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheckTests.swift; sourceTree = "<group>"; };
+		7822D3612739337F0031B006 /* OHServerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OHServerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7822D3632739337F0031B006 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7822D3652739337F0031B006 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7822D367273933800031B006 /* ServerAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ServerAssets.xcassets; sourceTree = "<group>"; };
+		7822D36C273933800031B006 /* OHServerApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OHServerApp.entitlements; sourceTree = "<group>"; };
+		7822D37327393B630031B006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		782578782628365600B8B953 /* OpenHaystackServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenHaystackServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		7825787A2628365600B8B953 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		782578822628380200B8B953 /* HTTPBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPBody.swift; sourceTree = "<group>"; };
+		782578842628388F00B8B953 /* ServerReportsFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerReportsFetcher.swift; sourceTree = "<group>"; };
+		782578B92628605E00B8B953 /* FindMyController_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindMyController_iOS.swift; sourceTree = "<group>"; };
 		78286C8E25E3AC0400F65511 /* OpenHaystackMail.mailbundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenHaystackMail.mailbundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		78286C9025E3AC0400F65511 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78286CAE25E3ACE700F65511 /* OpenHaystackPluginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenHaystackPluginService.h; sourceTree = "<group>"; };
@@ -170,8 +222,6 @@
 		78EC227625DBDB7E0042B775 /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
 		78F8BB4B261C50EB00D9F37F /* LargeButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButtonStyle.swift; sourceTree = "<group>"; };
 		F126102E2600D1D80066A859 /* Slider+LogScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Slider+LogScale.swift"; sourceTree = "<group>"; };
-		F12D5A5925FA4F3500CBBA09 /* BluetoothAccessoryScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothAccessoryScanner.swift; sourceTree = "<group>"; };
-		F12D5A5F25FA79FA00CBBA09 /* Advertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertisement.swift; sourceTree = "<group>"; };
 		F1647C1525FF6C61004144D6 /* BluetoothTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothTests.swift; sourceTree = "<group>"; };
 		F1647C1A25FF7954004144D6 /* AccessoryNearbyMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryNearbyMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +233,26 @@
 			files = (
 				781EB3F725DAD7EA00FEAA19 /* Crypto in Frameworks */,
 				F16BA9E925E7DB2D00238183 /* NIOSSL in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7822D35E2739337F0031B006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7822D37527393BAE0031B006 /* Vapor in Frameworks */,
+				78CDFF532757D515008553FA /* Crypto in Frameworks */,
+				78CDFF552757D567008553FA /* NIOSSL in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		782578752628365600B8B953 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78257881262836D400B8B953 /* Vapor in Frameworks */,
+				14949733287252CD009F9186 /* Crypto in Frameworks */,
+				14949735287252D4009F9186 /* NIOSSL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,16 +276,24 @@
 		024D98402490CD7F0063EBB6 /* BoringSSL */ = {
 			isa = PBXGroup;
 			children = (
-				024D98472490CE320063EBB6 /* BoringSSL.h */,
 				024D98482490CE320063EBB6 /* BoringSSL.m */,
+				024D98472490CE320063EBB6 /* BoringSSL.h */,
 			);
 			path = BoringSSL;
+			sourceTree = "<group>";
+		};
+		148DB38E28730D0000A2426B /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				148DB38F28730D0000A2426B /* Advertisement.swift */,
+				148DB39028730D0000A2426B /* BluetoothAccessoryScanner.swift */,
+			);
+			path = Bluetooth;
 			sourceTree = "<group>";
 		};
 		78023CAC25F7775300B083EF /* Firmwares */ = {
 			isa = PBXGroup;
 			children = (
-				5A2C9088273425720044407E /* NRF */,
 				78023CAE25F7797400B083EF /* ESP32 */,
 				78023CAD25F7775A00B083EF /* Microbit */,
 			);
@@ -237,6 +315,8 @@
 				78108B6E248E8FB50007E9C4 /* OpenHaystack */,
 				78EC226225DAE0BE0042B775 /* OpenHaystackTests */,
 				78286C8F25E3AC0400F65511 /* OpenHaystackMail */,
+				782578792628365600B8B953 /* OpenHaystackServer */,
+				7822D3622739337F0031B006 /* OHServerApp */,
 				78108B6D248E8FB50007E9C4 /* Products */,
 				78108B82248E8FDD0007E9C4 /* OpenHaystack-Bridging-Header.h */,
 				78108B88248E90190007E9C4 /* Frameworks */,
@@ -249,6 +329,8 @@
 				781EB40825DAD7EA00FEAA19 /* OpenHaystack.app */,
 				78EC226125DAE0BE0042B775 /* OpenHaystackTests.xctest */,
 				78286C8E25E3AC0400F65511 /* OpenHaystackMail.mailbundle */,
+				782578782628365600B8B953 /* OpenHaystackServer */,
+				7822D3612739337F0031B006 /* OHServerApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -300,12 +382,38 @@
 		78108B8D248F70CC0007E9C4 /* FindMy */ = {
 			isa = PBXGroup;
 			children = (
-				78108B8E248F70D40007E9C4 /* Models.swift */,
 				78108B90248F72AF0007E9C4 /* FindMyController.swift */,
 				7867874724A651C600199B09 /* FindMyKeyDecoder.swift */,
 				025DFEDB248FED250039C718 /* DecryptReports.swift */,
+				78108B8E248F70D40007E9C4 /* Models.swift */,
+				782578B92628605E00B8B953 /* FindMyController_iOS.swift */,
 			);
 			path = FindMy;
+			sourceTree = "<group>";
+		};
+		7822D3622739337F0031B006 /* OHServerApp */ = {
+			isa = PBXGroup;
+			children = (
+				148DB3C928732E7000A2426B /* main.swift */,
+				7822D37327393B630031B006 /* Info.plist */,
+				7822D3632739337F0031B006 /* AppDelegate.swift */,
+				782578822628380200B8B953 /* HTTPBody.swift */,
+				782578842628388F00B8B953 /* ServerReportsFetcher.swift */,
+				7822D3652739337F0031B006 /* ViewController.swift */,
+				7822D367273933800031B006 /* ServerAssets.xcassets */,
+				7822D36C273933800031B006 /* OHServerApp.entitlements */,
+			);
+			path = OHServerApp;
+			sourceTree = "<group>";
+		};
+		782578792628365600B8B953 /* OpenHaystackServer */ = {
+			isa = PBXGroup;
+			children = (
+				7825787A2628365600B8B953 /* main.swift */,
+				1494972628725289009F9186 /* HTTPBody.swift */,
+				1494972328725288009F9186 /* ServerReportsFetcher.swift */,
+			);
+			path = OpenHaystackServer;
 			sourceTree = "<group>";
 		};
 		78286C8F25E3AC0400F65511 /* OpenHaystackMail */ = {
@@ -341,7 +449,6 @@
 				78EC226525DAE0BE0042B775 /* Info.plist */,
 				78023CB025F7841F00B083EF /* MicrocontrollerTests.swift */,
 				F1647C1525FF6C61004144D6 /* BluetoothTests.swift */,
-				782853C327551B4400B18EDE /* UpdateCheckTests.swift */,
 			);
 			path = OpenHaystackTests;
 			sourceTree = "<group>";
@@ -349,6 +456,11 @@
 		78EC226E25DBC2FC0042B775 /* HaystackApp */ = {
 			isa = PBXGroup;
 			children = (
+				148DB38E28730D0000A2426B /* Bluetooth */,
+				148DB36C28730C8000A2426B /* NRFController.swift */,
+				148DB36D28730C8000A2426B /* UpdateCheckController.swift */,
+				148DB36228730C4400A2426B /* DataToHexExtension.swift */,
+				148DB35028730C1A00A2426B /* NRFInstallSheet.swift */,
 				F12D5A5E25FA79D600CBBA09 /* Bluetooth */,
 				78023CAC25F7775300B083EF /* Firmwares */,
 				78286D3A25E4017400F65511 /* Mail Plugin */,
@@ -360,9 +472,6 @@
 				78023CAA25F7767000B083EF /* ESP32Controller.swift */,
 				7821DAD025F7B2C10054DC33 /* FileManager.swift */,
 				F1647C1A25FF7954004144D6 /* AccessoryNearbyMonitor.swift */,
-				5A2C908A2734266A0044407E /* DataToHexExtension.swift */,
-				5A2C908C273429360044407E /* NRFController.swift */,
-				782853C12755103A00B18EDE /* UpdateCheckController.swift */,
 			);
 			path = HaystackApp;
 			sourceTree = "<group>";
@@ -382,15 +491,14 @@
 				78F8BB4A261C50D500D9F37F /* Styles */,
 				78286D7625E5114600F65511 /* ActivityIndicator.swift */,
 				78EC226B25DBC2E40042B775 /* OpenHaystackMainView.swift */,
+				78D9B80525F7CF60009B9CE8 /* ManageAccessoriesView.swift */,
 				78486BEE25DD711E0007ED87 /* PopUpAlertView.swift */,
 				7899D1E025DE97E200115740 /* IconSelectionView.swift */,
 				7899D1E825DEBF4800115740 /* AccessoryMapAnnotation.swift */,
 				78286E0125E66F9400F65511 /* AccessoryListEntry.swift */,
 				7851F1DC25EE90FA0049480D /* AccessoryMapView.swift */,
 				7821DAD225F7C39A0054DC33 /* ESP32InstallSheet.swift */,
-				78D9B80525F7CF60009B9CE8 /* ManageAccessoriesView.swift */,
 				F126102E2600D1D80066A859 /* Slider+LogScale.swift */,
-				5A2C908E273429540044407E /* NRFInstallSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -406,8 +514,6 @@
 		F12D5A5E25FA79D600CBBA09 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				F12D5A5925FA4F3500CBBA09 /* BluetoothAccessoryScanner.swift */,
-				F12D5A5F25FA79FA00CBBA09 /* Advertisement.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -439,6 +545,50 @@
 			productName = OfflineFinder;
 			productReference = 781EB40825DAD7EA00FEAA19 /* OpenHaystack.app */;
 			productType = "com.apple.product-type.application";
+		};
+		7822D3602739337F0031B006 /* OHServerApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7822D36F273933800031B006 /* Build configuration list for PBXNativeTarget "OHServerApp" */;
+			buildPhases = (
+				7822D35D2739337F0031B006 /* Sources */,
+				7822D35E2739337F0031B006 /* Frameworks */,
+				7822D35F2739337F0031B006 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OHServerApp;
+			packageProductDependencies = (
+				7822D37427393BAE0031B006 /* Vapor */,
+				78CDFF522757D515008553FA /* Crypto */,
+				78CDFF542757D567008553FA /* NIOSSL */,
+			);
+			productName = OHServerApp;
+			productReference = 7822D3612739337F0031B006 /* OHServerApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		782578772628365600B8B953 /* OpenHaystackServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7825787E2628365600B8B953 /* Build configuration list for PBXNativeTarget "OpenHaystackServer" */;
+			buildPhases = (
+				782578742628365600B8B953 /* Sources */,
+				782578752628365600B8B953 /* Frameworks */,
+				782578762628365600B8B953 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenHaystackServer;
+			packageProductDependencies = (
+				78257880262836D400B8B953 /* Vapor */,
+				14949732287252CD009F9186 /* Crypto */,
+				14949734287252D4009F9186 /* NIOSSL */,
+			);
+			productName = HaystackServer;
+			productReference = 782578782628365600B8B953 /* OpenHaystackServer */;
+			productType = "com.apple.product-type.tool";
 		};
 		78286C8D25E3AC0400F65511 /* OpenHaystackMail */ = {
 			isa = PBXNativeTarget;
@@ -483,10 +633,16 @@
 		78108B64248E8FB50007E9C4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "SEEMOO - TU Darmstadt";
 				TargetAttributes = {
+					7822D3602739337F0031B006 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					782578772628365600B8B953 = {
+						CreatedOnToolsVersion = 12.5;
+					};
 					78286C8D25E3AC0400F65511 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -508,6 +664,7 @@
 			packageReferences = (
 				0211DBBF2491203100ABB066 /* XCRemoteSwiftPackageReference "swift-crypto" */,
 				F16BA9E725E7DB2D00238183 /* XCRemoteSwiftPackageReference "swift-nio-ssl" */,
+				7825787F262836D400B8B953 /* XCRemoteSwiftPackageReference "vapor" */,
 			);
 			productRefGroup = 78108B6D248E8FB50007E9C4 /* Products */;
 			projectDirPath = "";
@@ -516,6 +673,8 @@
 				781EB3E425DAD7EA00FEAA19 /* OpenHaystack */,
 				78286C8D25E3AC0400F65511 /* OpenHaystackMail */,
 				78EC226025DAE0BE0042B775 /* OpenHaystackTests */,
+				782578772628365600B8B953 /* OpenHaystackServer */,
+				7822D3602739337F0031B006 /* OHServerApp */,
 			);
 		};
 /* End PBXProject section */
@@ -528,9 +687,16 @@
 				78023CAF25F7797400B083EF /* ESP32 in Resources */,
 				7899D1D625DE74EE00115740 /* firmware.bin in Resources */,
 				781EB3FE25DAD7EA00FEAA19 /* MapViewController.xib in Resources */,
-				5A2C9089273425720044407E /* NRF in Resources */,
 				781EB40025DAD7EA00FEAA19 /* Preview Assets.xcassets in Resources */,
 				781EB40225DAD7EA00FEAA19 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7822D35F2739337F0031B006 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7822D368273933800031B006 /* ServerAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,7 +782,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A2C908D273429360044407E /* NRFController.swift in Sources */,
+				148DB36E28730C8000A2426B /* NRFController.swift in Sources */,
+				148DB39228730D0000A2426B /* BluetoothAccessoryScanner.swift in Sources */,
+				148DB35228730C1A00A2426B /* NRFInstallSheet.swift in Sources */,
 				781EB43125DADF2B00FEAA19 /* AnisetteDataManager.swift in Sources */,
 				7851F1DD25EE90FA0049480D /* AccessoryMapView.swift in Sources */,
 				7899D1E925DEBF4900115740 /* AccessoryMapAnnotation.swift in Sources */,
@@ -625,35 +793,71 @@
 				78286D8C25E5355B00F65511 /* PreviewData.swift in Sources */,
 				781EB3EB25DAD7EA00FEAA19 /* SavePanel.swift in Sources */,
 				7899D1E125DE97E200115740 /* IconSelectionView.swift in Sources */,
-				5A2C908F273429540044407E /* NRFInstallSheet.swift in Sources */,
 				78EC227725DBDB7E0042B775 /* KeychainController.swift in Sources */,
 				78D9B80625F7CF60009B9CE8 /* ManageAccessoriesView.swift in Sources */,
 				78486BEF25DD711E0007ED87 /* PopUpAlertView.swift in Sources */,
+				148DB36F28730C8000A2426B /* UpdateCheckController.swift in Sources */,
 				78014A2925DC08580089F6D9 /* MicrobitController.swift in Sources */,
 				F126102F2600D1D80066A859 /* Slider+LogScale.swift in Sources */,
 				F1647C1B25FF7954004144D6 /* AccessoryNearbyMonitor.swift in Sources */,
 				78286D1F25E3D8B800F65511 /* ALTAnisetteData.m in Sources */,
 				781EB3EC25DAD7EA00FEAA19 /* DecryptReports.swift in Sources */,
+				148DB36428730C4400A2426B /* DataToHexExtension.swift in Sources */,
 				78EC226C25DBC2E40042B775 /* OpenHaystackMainView.swift in Sources */,
-				5A2C908B2734266A0044407E /* DataToHexExtension.swift in Sources */,
 				78EC227225DBC8CE0042B775 /* Accessory.swift in Sources */,
 				7821DAD125F7B2C10054DC33 /* FileManager.swift in Sources */,
 				78286E0225E66F9400F65511 /* AccessoryListEntry.swift in Sources */,
 				781EB3EF25DAD7EA00FEAA19 /* MapViewController.swift in Sources */,
 				78286D7725E5114600F65511 /* ActivityIndicator.swift in Sources */,
 				7821DAD325F7C39A0054DC33 /* ESP32InstallSheet.swift in Sources */,
+				148DB39128730D0000A2426B /* Advertisement.swift in Sources */,
 				781EB3F125DAD7EA00FEAA19 /* FindMyKeyDecoder.swift in Sources */,
 				787D8AC125DECD3C00148766 /* AccessoryController.swift in Sources */,
 				78023CAB25F7767000B083EF /* ESP32Controller.swift in Sources */,
-				F12D5A6025FA79FA00CBBA09 /* Advertisement.swift in Sources */,
 				781EB3F225DAD7EA00FEAA19 /* OpenHaystackApp.swift in Sources */,
 				781EB3F325DAD7EA00FEAA19 /* Models.swift in Sources */,
 				78F8BB4C261C50EB00D9F37F /* LargeButtonStyle.swift in Sources */,
 				781EB3F425DAD7EA00FEAA19 /* FindMyController.swift in Sources */,
 				781EB3F525DAD7EA00FEAA19 /* BoringSSL.m in Sources */,
-				782853C22755103A00B18EDE /* UpdateCheckController.swift in Sources */,
-				F12D5A5A25FA4F3500CBBA09 /* BluetoothAccessoryScanner.swift in Sources */,
 				78286D5625E401F000F65511 /* MailPluginManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7822D35D2739337F0031B006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78CDFF4D2757CFF9008553FA /* DecryptReports.swift in Sources */,
+				148DB3CA28732E7000A2426B /* main.swift in Sources */,
+				7822D371273933940031B006 /* HTTPBody.swift in Sources */,
+				7822D3662739337F0031B006 /* ViewController.swift in Sources */,
+				78CDFF4E2757CFFC008553FA /* FindMyKeyDecoder.swift in Sources */,
+				7822D37627393BBE0031B006 /* AnisetteDataManager.swift in Sources */,
+				78BAB61227393BEA009D82B6 /* ReportsFetcher.m in Sources */,
+				7822D370273933940031B006 /* ServerReportsFetcher.swift in Sources */,
+				7822D3642739337F0031B006 /* AppDelegate.swift in Sources */,
+				78BAB61427393CB7009D82B6 /* AppleAccountData.m in Sources */,
+				78CDFF562757D5C2008553FA /* BoringSSL.m in Sources */,
+				78CDFF4C2757CFEF008553FA /* Models.swift in Sources */,
+				78BAB61327393CB3009D82B6 /* ALTAnisetteData.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		782578742628365600B8B953 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1441B5C1287254FD004593A5 /* DecryptReports.swift in Sources */,
+				1494972A28725289009F9186 /* HTTPBody.swift in Sources */,
+				1441B5B9287254F5004593A5 /* FindMyKeyDecoder.swift in Sources */,
+				7825788726283BAF00B8B953 /* AnisetteDataManager.swift in Sources */,
+				78A55404262882F100B00856 /* ReportsFetcher.m in Sources */,
+				1494972728725289009F9186 /* ServerReportsFetcher.swift in Sources */,
+				782578882628406700B8B953 /* AppleAccountData.m in Sources */,
+				7825787B2628365600B8B953 /* main.swift in Sources */,
+				1441B5B1287254AB004593A5 /* BoringSSL.m in Sources */,
+				1441B5D028725548004593A5 /* Models.swift in Sources */,
+				782578892628406A00B8B953 /* ALTAnisetteData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,7 +875,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				78023CB125F7841F00B083EF /* MicrocontrollerTests.swift in Sources */,
-				782853C427551B4400B18EDE /* UpdateCheckTests.swift in Sources */,
 				F1647C1625FF6C61004144D6 /* BluetoothTests.swift in Sources */,
 				78EC226425DAE0BE0042B775 /* OpenHaystackTests.swift in Sources */,
 			);
@@ -744,7 +947,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -799,7 +1002,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -820,7 +1023,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = "";
+				EXCLUDED_ARCHS = "arm64e arm64";
 				INFOPLIST_FILE = OpenHaystack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -847,7 +1050,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = "";
+				EXCLUDED_ARCHS = "arm64e arm64";
 				INFOPLIST_FILE = OpenHaystack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -857,6 +1060,104 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-darmstadt.seemoo.OpenHaystack";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenHaystack-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		7822D36D273933800031B006 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = OHServerApp/OHServerApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OHServerApp/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 SEEMOO - TU Darmstadt. All rights reserved.";
+				INFOPLIST_KEY_NSPrincipalClass = OHServerApp.OHServerApp;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-darmstadt.seemoo.OHServerApp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenHaystack-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "OpenHaystack-Swift.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7822D36E273933800031B006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = OHServerApp/OHServerApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OHServerApp/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 SEEMOO - TU Darmstadt. All rights reserved.";
+				INFOPLIST_KEY_NSPrincipalClass = OHServerApp.OHServerApp;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-darmstadt.seemoo.OHServerApp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenHaystack-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "OpenHaystack-Swift.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		7825787C2628365600B8B953 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				NEW_SETTING = "";
+				OTHER_CFLAGS = (
+					"-D",
+					SERVER,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-darmstadt.seemoo.OpenHaystackServer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenHaystack-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7825787D2628365600B8B953 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				NEW_SETTING = "";
+				OTHER_CFLAGS = (
+					"-D",
+					SERVER,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-darmstadt.seemoo.OpenHaystackServer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenHaystack-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -965,6 +1266,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		7822D36F273933800031B006 /* Build configuration list for PBXNativeTarget "OHServerApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7822D36D273933800031B006 /* Debug */,
+				7822D36E273933800031B006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7825787E2628365600B8B953 /* Build configuration list for PBXNativeTarget "OpenHaystackServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7825787C2628365600B8B953 /* Debug */,
+				7825787D2628365600B8B953 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		78286C9325E3AC0400F65511 /* Build configuration list for PBXNativeTarget "OpenHaystackMail" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1002,6 +1321,14 @@
 				minimumVersion = 1.0.2;
 			};
 		};
+		7825787F262836D400B8B953 /* XCRemoteSwiftPackageReference "vapor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/vapor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.44.1;
+			};
+		};
 		F16BA9E725E7DB2D00238183 /* XCRemoteSwiftPackageReference "swift-nio-ssl" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-nio-ssl";
@@ -1013,10 +1340,40 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		14949732287252CD009F9186 /* Crypto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0211DBBF2491203100ABB066 /* XCRemoteSwiftPackageReference "swift-crypto" */;
+			productName = Crypto;
+		};
+		14949734287252D4009F9186 /* NIOSSL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F16BA9E725E7DB2D00238183 /* XCRemoteSwiftPackageReference "swift-nio-ssl" */;
+			productName = NIOSSL;
+		};
 		781EB3E725DAD7EA00FEAA19 /* Crypto */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 781EB3E825DAD7EA00FEAA19 /* XCRemoteSwiftPackageReference "swift-crypto" */;
 			productName = Crypto;
+		};
+		7822D37427393BAE0031B006 /* Vapor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7825787F262836D400B8B953 /* XCRemoteSwiftPackageReference "vapor" */;
+			productName = Vapor;
+		};
+		78257880262836D400B8B953 /* Vapor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7825787F262836D400B8B953 /* XCRemoteSwiftPackageReference "vapor" */;
+			productName = Vapor;
+		};
+		78CDFF522757D515008553FA /* Crypto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0211DBBF2491203100ABB066 /* XCRemoteSwiftPackageReference "swift-crypto" */;
+			productName = Crypto;
+		};
+		78CDFF542757D567008553FA /* NIOSSL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F16BA9E725E7DB2D00238183 /* XCRemoteSwiftPackageReference "swift-nio-ssl" */;
+			productName = NIOSSL;
 		};
 		F16BA9E825E7DB2D00238183 /* NIOSSL */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -12,8 +12,11 @@
 
 #import <Accounts/Accounts.h>
 
+#ifdef SERVER
+#import "OpenHaystackServer-Swift.h"
+#else
 #import "OpenHaystack-Swift.h"
-
+#endif
 @implementation ReportsFetcher
 
 - (NSData *_Nullable)fetchSearchpartyToken {
@@ -166,7 +169,9 @@
       NSURLResponse *response;
       NSError *error = nil;
       NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:&response error:&error];
-
+      //  NSString *o = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+      //  NSLog(@"%@", o);
+      //  NSLog(data);
       if (error) {
           NSLog(@"Error during request: \n\n%@", error);
       }

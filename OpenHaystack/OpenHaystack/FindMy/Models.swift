@@ -157,18 +157,20 @@ struct FindMyLocationReport: Codable {
     let datePublished: Date
     let timestamp: Date?
     let confidence: UInt8?
+    let status: UInt8
 
     var location: CLLocation {
         return CLLocation(latitude: latitude, longitude: longitude)
     }
 
-    init(lat: Double, lng: Double, acc: UInt8, dP: Date, t: Date, c: UInt8) {
+    init(lat: Double, lng: Double, acc: UInt8, dP: Date, t: Date, c: UInt8, s: UInt8 = 0) {
         self.latitude = lat
         self.longitude = lng
         self.accuracy = acc
         self.datePublished = dP
         self.timestamp = t
         self.confidence = c
+        self.status = s
     }
 
     init(from decoder: Decoder) throws {
@@ -176,6 +178,7 @@ struct FindMyLocationReport: Codable {
 
         self.latitude = try values.decode(Double.self, forKey: .latitude)
         self.longitude = try values.decode(Double.self, forKey: .longitude)
+        self.status = (try? values.decode(UInt8.self, forKey: .status)) ?? 0
 
         do {
             let uAcc = try values.decode(UInt8.self, forKey: .accuracy)

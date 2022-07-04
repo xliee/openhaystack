@@ -55,25 +55,34 @@ class AccessoryController: ObservableObject {
     }
 
     func save() throws {
-        try KeychainController.storeInKeychain(accessories: self.accessories)
+        return;
+        // try KeychainController.storeInKeychain(accessories: self.accessories)
     }
 
     func updateWithDecryptedReports(devices: [FindMyDevice]) {
         // Assign last locations
         for device in devices {
+            // quadratic complexity here
+            if (device.decryptedReports == nil || device.decryptedReports?.count == 0) {
+                continue
+            }
             if let idx = self.accessories.firstIndex(where: { $0.id == Int(device.deviceId) }) {
-                self.objectWillChange.send()
+                os_log("updating \(idx)")
                 let accessory = self.accessories[idx]
 
                 let report = device.decryptedReports?
                     .sorted(by: { $0.timestamp ?? Date.distantPast > $1.timestamp ?? Date.distantPast })
                     .first
+                
+                if (report == nil) { continue }
 
                 accessory.lastLocation = report?.location
                 accessory.locationTimestamp = report?.timestamp
                 accessory.locations = device.decryptedReports
             }
         }
+        self.objectWillChange.send()
+        
     }
 
     func delete(accessory: Accessory) throws {

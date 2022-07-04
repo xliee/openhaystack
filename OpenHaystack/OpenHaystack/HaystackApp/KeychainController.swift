@@ -14,6 +14,7 @@ import Security
 struct KeychainController {
 
     static func loadAccessoriesFromKeychain(test: Bool = false) -> [Accessory] {
+        return [];
         var query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrLabel: "FindMyAccessories",
@@ -46,6 +47,7 @@ struct KeychainController {
     }
 
     static func storeInKeychain(accessories: [Accessory], test: Bool = false) throws {
+        return;
         // Store or update
         var attributes: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
