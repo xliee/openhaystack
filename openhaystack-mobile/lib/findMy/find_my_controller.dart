@@ -30,9 +30,18 @@ class FindMyController {
   /// Returns a list of [FindMyLocationReport].
   static Future<List<FindMyLocationReport>> _getListedReportResults(FindMyKeyPair keyPair) async{
     List<FindMyLocationReport> results = <FindMyLocationReport>[];
-    final jsonResults = await ReportsFetcher.fetchLocationReports(keyPair.getHashedAdvertisementKey());
+    print("loading results");
+    final jsonResults = await ReportsFetcher.fetchLocationReports(keyPair.getHashedAdvertisementKey(), keyPair.getBase64PrivateKey());
+    // print("${jsonResults}");
     for (var result in jsonResults) {
-      results.add(await _decryptResult(result, keyPair, keyPair.privateKeyBase64!));
+      var rep = result["decryptedReport"];
+      final DateTime timestamp = DateTime.parse(rep['timestamp']);
+      final DateTime datePublished = DateTime.parse(rep['datePublished']);
+      final int confidence = rep['confidence'];
+      final int accuracy = rep['accuracy'];
+
+      results.add(FindMyLocationReport(rep["latitude"]*1.0, rep["longitude"]*1.0, accuracy, datePublished, timestamp, confidence));
+      // results.add(await _decryptResult(result, keyPair, keyPair.privateKeyBase64!));
     }
     return results;
   }
@@ -65,7 +74,7 @@ class FindMyController {
   static Future<FindMyLocationReport> _decryptResult(dynamic result, FindMyKeyPair keyPair, String privateKey) async {
     assert (result["id"]! == keyPair.getHashedAdvertisementKey(),
       "Returned FindMyReport hashed key != requested hashed key");
-
+    print(result);
     final unixTimestampInMillis =  result["datePublished"];
     final datePublished = DateTime.fromMillisecondsSinceEpoch(unixTimestampInMillis); 
     FindMyReport report = FindMyReport(

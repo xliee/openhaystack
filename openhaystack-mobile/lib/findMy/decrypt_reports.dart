@@ -11,7 +11,8 @@ class DecryptReports {
   static Future<FindMyLocationReport> decryptReport(
       FindMyReport report, Uint8List key) async {
     final curveDomainParam = ECCurve_secp224r1();
-
+    print("Decoding...");
+    print(report.payload);
     final payloadData = report.payload;
     final ephemeralKeyBytes = payloadData.sublist(5, 62);
     final encData = payloadData.sublist(62, 72);
@@ -31,7 +32,7 @@ class DecryptReports {
 
     final decryptedPayload = _decryptPayload(encData, derivedKey, tag);
     final locationReport = _decodePayload(decryptedPayload, report);
-
+    print(locationReport);
     return locationReport;
   }
 

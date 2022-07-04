@@ -55,8 +55,11 @@ class _DashboardDesktopState extends State<DashboardDesktop> {
                 AppBar(
                   title: const Text('OpenHaystack'),
                   leading: IconButton(
-                    onPressed: () { /* reload */ },
-                    icon: const Icon(Icons.menu),
+                    onPressed: () { 
+                      /* reload */ 
+                      loadLocationUpdates();
+                    },
+                    icon: const Icon(Icons.refresh),
                   ),
                   actions: <Widget>[
                     IconButton(

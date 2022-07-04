@@ -103,6 +103,12 @@ class _DashboardMobileState extends State<DashboardMobile> {
             },
             icon: const Icon(Icons.settings),
           ),
+          IconButton(
+            onPressed: () {
+              loadLocationUpdates();
+            },
+            icon: const Icon(Icons.replay_outlined),
+          ),
         ],
       ),
       body: _tabs[_selectedIndex]['body'](context),

@@ -47,7 +47,7 @@ dependencies:
 
   # Location
   flutter_map: ^0.14.0
-  location: ^4.2.0
+  location: ^4.4.0
   geocoding: ^2.0.1
 
   # Storage
@@ -57,7 +57,7 @@ dependencies:
 
   # Sharing
   receive_sharing_intent: ^1.4.5
-  share_plus: ^3.0.4
+  share_plus: ^4.0.10
   url_launcher: ^6.0.17
   path_provider: ^2.0.8
   maps_launcher: ^2.0.1
