@@ -10,7 +10,9 @@ class ReportsFetcher {
   /// key.
   /// Throws [Exception] if no answer was received.
   static Future<List> fetchLocationReports(String hashedAdvertisementKey, String base64privateKey) async {
-    print("fetching reports for $hashedAdvertisementKey");
+    print("Advertisement Key: ${hashedAdvertisementKey}");
+    print("Private Key: ${base64privateKey}");
+    // print("fetching reports for $hashedAdvertisementKey");
     final response = await http.post(Uri.parse(_seemooEndpoint),
         headers: <String, String>{
           "Content-Type": "application/json",
