@@ -1,3 +1,2 @@
-idf_component_register(SRCS "openhaystack_main.c"
-                           
-                    INCLUDE_DIRS ".")
+idf_component_register(SRCS "crypto.c" "utils.c" "airTagBT.c" "main.c"
+                    INCLUDE_DIRS "")
