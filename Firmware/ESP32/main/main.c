@@ -16,9 +16,14 @@
 #include "mbedtls/base64.h"
 
 #include "esp_system.h"
+#include "esp_efuse.h"
+#include "soc/efuse_reg.h"
+#include "esp_efuse_table.h"
 #include "esp_spi_flash.h"
 #include "esp_partition.h"
+#include "esp_flash_encrypt.h"
 #include "nvs_flash.h"
+
 
 // bluetooth
 #include "esp_bt.h"
@@ -26,7 +31,6 @@
 #include "esp_bt_defs.h"
 #include "esp_log.h"
 
-#include "driver/uart.h"
 
 #include "esp_sleep.h"
 #include "esp_event.h"
@@ -34,6 +38,8 @@
 // #include "esp_gap_ble_api.h"
 // #include "esp_gattc_api.h"
 // #include "esp_gatt_defs.h"
+
+#include "driver/uart.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -46,7 +52,13 @@
 #define DELAY_IN_S 5
 #define RESET_INTERVAL 20
 
-
+#if CONFIG_IDF_TARGET_ESP32
+#define TARGET_CRYPT_CNT_EFUSE  ESP_EFUSE_FLASH_CRYPT_CNT
+#define TARGET_CRYPT_CNT_WIDTH  7
+#else
+#define TARGET_CRYPT_CNT_EFUSE ESP_EFUSE_SPI_BOOT_CRYPT_CNT
+#define TARGET_CRYPT_CNT_WIDTH  3
+#endif
 
 /** Random device address */
 static esp_bd_addr_t rnd_addr = { 0xFF, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF };
@@ -67,10 +79,39 @@ static uint8_t adv_data[31] = {
 
 
 
+int load_key(uint8_t *dst, size_t size, size_t offset, bool sk) {
+    const esp_partition_t *keypart = esp_partition_find_first(0x40, 0x00, (sk?"sk":"pk"));
+    if (keypart == NULL) {
+        ESP_LOGE(LOG_TAG, "Could not find key partition");
+        return 1;
+    }
+    esp_err_t status;
+    status = esp_partition_read(keypart, offset, dst, size);
+    if (status != ESP_OK) {
+        ESP_LOGE(LOG_TAG, "Could not read key from partition: %s", esp_err_to_name(status));
+    }
+    return status;
+}
 
+
+// int write_key(uint8_t *dst, size_t size, size_t offset) {
+//     const esp_partition_t *keypart = esp_partition_find_first(0x40, 0x00, "pk");
+//     if (keypart == NULL) {
+//         ESP_LOGE(LOG_TAG, "Could not find key partition");
+//         return 1;
+//     }
+//     esp_err_t status;
+//     status = esp_partition_read(keypart, offset, dst, size);
+//     if (status != ESP_OK) {
+//         ESP_LOGE(LOG_TAG, "Could not read key from partition: %s", esp_err_to_name(status));
+//     }
+//     return status;
+// }
 
 void app_main(void)
 {
+    print_chip_info();
+
     ESP_ERROR_CHECK(nvs_flash_init());
     ESP_ERROR_CHECK(esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT));
     esp_bt_controller_config_t bt_cfg = BT_CONTROLLER_INIT_CONFIG_DEFAULT();
@@ -80,6 +121,8 @@ void app_main(void)
     esp_bluedroid_init();
     esp_bluedroid_enable();
 
+    esp_ble_tx_power_set(ESP_BLE_PWR_TYPE_ADV, ESP_PWR_LVL_P9);
+
     ESP_LOGI(LOG_TAG, "application initialized");
 
 
@@ -88,11 +131,12 @@ void app_main(void)
     unsigned char d_0[Private_Key_Size];
     unsigned char SK_0[Simetric_Key_Size];
 
-    unsigned char d_0_b64[] = "s9J5hI/DxtLlG31A41zil+wKflRixSLKx2M8yA==";
-    unsigned char sk_0_b64[] = "C4XtRo98PhhzO9V/jwwIPprCjxk3mSn+O+gRIG7unWc=";
-
-    mbedtls_base64_decode(d_0, Private_Key_Size, &dummy, (const unsigned char *)d_0_b64, strlen((const char *)d_0_b64));
-    mbedtls_base64_decode(SK_0, Simetric_Key_Size, &dummy, (const unsigned char *)sk_0_b64, strlen((const char *)sk_0_b64));
+    // unsigned char d_0_b64[] = "s9J5hI/DxtLlG31A41zil+wKflRixSLKx2M8yA==";
+    // unsigned char sk_0_b64[] = "C4XtRo98PhhzO9V/jwwIPprCjxk3mSn+O+gRIG7unWc=";
+    load_key(d_0, Private_Key_Size, 0, false); // load pk partition
+    load_key(SK_0, Simetric_Key_Size, 0, true); // load sk partition
+    // mbedtls_base64_decode(d_0, Private_Key_Size, &dummy, (const unsigned char *)d_0_b64, strlen((const char *)d_0_b64));
+    // mbedtls_base64_decode(SK_0, Simetric_Key_Size, &dummy, (const unsigned char *)sk_0_b64, strlen((const char *)sk_0_b64));
 
     mbedtls_printf("d_0: \n");
     print_hex(d_0, Private_Key_Size, true);

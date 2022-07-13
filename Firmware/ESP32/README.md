@@ -5,7 +5,7 @@ After flashing our firmware, the device sends out Bluetooth Low Energy advertise
 
 ## Disclaimer
 
-Note that the firmware is just a proof-of-concept and currently only implements advertising a single static key. This means that **devices running this firmware are trackable** by other devices in proximity.
+Note that the firmware is just a proof-of-concept which implement a key derivation algorithm.
 
 ## Requirements
 
@@ -36,9 +36,13 @@ These files are required for the next step: Deploy the firmware.
 Use the `flash_esp32.sh` script to deploy the firmware and a public key to an ESP32 device connected to your local machine:
 
 ```bash
-./flash_esp32.sh -p /dev/yourSerialPort 
+flash.bat "base64 simetric key" "base64 private key"
+
+e.g.
+flash.bat "C4XtRo98PhhzO9V/jwwIPprCjxk3mSn+O+gRIG7unWc=" "s9J5hI/DxtLlG31A41zil+wKflRixSLKx2M8yA=="
+
 ```
 
 > **Note:** You might need to reset your device after running the script before it starts sending advertisements.
 
-For more options, see `./flash-esp32.h --help`.
+<!-- For more options, see `./flash-esp32.h --help`. -->

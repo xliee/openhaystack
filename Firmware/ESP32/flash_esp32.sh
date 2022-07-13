@@ -137,8 +137,8 @@ trap cleanup INT TERM EXIT
 # Clear NVM
 
 esptool.py --after no_reset --port "$PORT" \
-    erase_region 0x9000 0x5000
+    erase_region 0xa000 0x5000
 esptool.py --before no_reset --baud $BAUDRATE --port "$PORT" \
     write_flash 0x1000  "$SCRIPT_DIR/build/bootloader/bootloader.bin" \
-                0x8000  "$SCRIPT_DIR/build/partition_table/partition-table.bin" \
+                0x9000  "$SCRIPT_DIR/build/partition_table/partition-table.bin" \
                 0x10000 "$SCRIPT_DIR/build/openhaystack.bin"
