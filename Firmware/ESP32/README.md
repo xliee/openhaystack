@@ -36,10 +36,10 @@ These files are required for the next step: Deploy the firmware.
 Use the `flash_esp32.sh` script to deploy the firmware and a public key to an ESP32 device connected to your local machine:
 
 ```bash
-flash.bat "base64 simetric key" "base64 private key"
+flash.bat PORT "base64 simetric key" "base64 uncompressed public key"
 
 e.g.
-flash.bat "C4XtRo98PhhzO9V/jwwIPprCjxk3mSn+O+gRIG7unWc=" "s9J5hI/DxtLlG31A41zil+wKflRixSLKx2M8yA=="
+flash.bat COM6 "C4XtRo98PhhzO9V/jwwIPprCjxk3mSn+O+gRIG7unWc=" "BBX8cYk9jDdMRRuty8kTyJHelSPhYAfgGDMI4Kb88Nl9PTshm7nBZY1/FowHEHJ6b61Y7HkXhSdh"
 
 ```
 

@@ -3,3 +3,4 @@ venv/**
 sdkconfig.old
 .vscode
 .vscode/**
+*.key

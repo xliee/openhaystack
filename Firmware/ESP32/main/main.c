@@ -128,26 +128,26 @@ void app_main(void)
 
     size_t dummy = 0;
 
-    unsigned char d_0[Private_Key_Size];
+    unsigned char pk_0[Uncompressed_Public_Key_Size];
     unsigned char SK_0[Simetric_Key_Size];
 
     // unsigned char d_0_b64[] = "s9J5hI/DxtLlG31A41zil+wKflRixSLKx2M8yA==";
     // unsigned char sk_0_b64[] = "C4XtRo98PhhzO9V/jwwIPprCjxk3mSn+O+gRIG7unWc=";
-    load_key(d_0, Private_Key_Size, 0, false); // load pk partition
+    load_key(pk_0, Uncompressed_Public_Key_Size, 0, false); // load pk partition
     load_key(SK_0, Simetric_Key_Size, 0, true); // load sk partition
     // mbedtls_base64_decode(d_0, Private_Key_Size, &dummy, (const unsigned char *)d_0_b64, strlen((const char *)d_0_b64));
     // mbedtls_base64_decode(SK_0, Simetric_Key_Size, &dummy, (const unsigned char *)sk_0_b64, strlen((const char *)sk_0_b64));
 
-    mbedtls_printf("d_0: \n");
-    print_hex(d_0, Private_Key_Size, true);
+    mbedtls_printf("pk 0 (uncompressed): \n");
+    print_hex(pk_0, Uncompressed_Public_Key_Size, true);
 
-    mbedtls_printf("sk_0: \n");
+    mbedtls_printf("sk: \n");
     print_hex(SK_0, Simetric_Key_Size, true);
 
 
 
 
-    mbedtls_printf("STARTING.... \n");
+    mbedtls_printf("\nSTARTING.... \n");
 
     // memset(derivedSymetricKey, '\0', Simetric_Key_Size);
     // unsigned char update_shared[] = "update";
@@ -176,7 +176,7 @@ void app_main(void)
         printf("\nIteration %d \n", count);
         if(count == 0 || count % RESET_INTERVAL == 0){
             printf("\nDeriving New Keys... \n");
-            DeriveKeyPair(derivedPublicKey, derivedSymetricKey, d_0);
+            DeriveKeyPair(derivedPublicKey, derivedSymetricKey, pk_0);
             // calculate advertisement key for bluetooth
             memcpy(derivedAdvertismentKey, &derivedPublicKey[1], Advertisement_Key_Size);
             printf("PK: 0x");

@@ -78,7 +78,7 @@ int mbedtls_ansi_x936_kdf(mbedtls_md_type_t md_type, size_t input_len, uint8_t i
     return MBEDTLS_EXIT_SUCCESS;
 }
 
-void calculatePrivateKeyFromSharedData(unsigned char d_i[], unsigned char sharedData[], unsigned char privateKey[])
+void calculatePublicFromSharedData(unsigned char p_i[], unsigned char sharedData[], unsigned char publicKey[])
 {
     int ret = 1;
     // load curve
@@ -86,21 +86,40 @@ void calculatePrivateKeyFromSharedData(unsigned char d_i[], unsigned char shared
         u_i_bn,
         v_i_bn,
         d_0_bn,
-        d_i_bn,
+        // d_i_bn,
         tmp_bn;
     mbedtls_mpi_init(&order);
     mbedtls_mpi_init(&u_i_bn);
     mbedtls_mpi_init(&v_i_bn);
     mbedtls_mpi_init(&d_0_bn);
-    mbedtls_mpi_init(&d_i_bn);
+    // mbedtls_mpi_init(&d_i_bn);
     mbedtls_mpi_init(&tmp_bn);
 
-    mbedtls_ecp_group grp;
-    mbedtls_ecp_group_init(&grp);
-    mbedtls_ecp_group_load(&grp, CURVE224);
+
+    mbedtls_entropy_context entropy;
+    mbedtls_ctr_drbg_context ctr_drbg;
+    mbedtls_pk_context pk;
+    mbedtls_ecp_keypair *ec = malloc(sizeof(mbedtls_ecp_keypair));
+
+    mbedtls_ctr_drbg_init(&ctr_drbg);
+    mbedtls_entropy_init(&entropy);
+    mbedtls_pk_init(&pk);
+    mbedtls_ecp_keypair_init(ec);
+
+    //set seed for random number generator
+    mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy, (const unsigned char *)"N/$!eW9zD6oA#X*/35b%", 20);
+
+
+    mbedtls_pk_setup(&pk, mbedtls_pk_info_from_type(MBEDTLS_PK_ECDSA));
+    mbedtls_ecp_group_load(&ec->grp, CURVE224);
+
+    mbedtls_ecp_point tmp_point_0;
+    mbedtls_ecp_point_init(&tmp_point_0);
+
+
 
     // get order of (G) curve
-    mbedtls_mpi_copy(&order, &grp.N);
+    mbedtls_mpi_copy(&order, &ec->grp.N);
 
     // (order of G) - 1
     mbedtls_mpi_sub_int(&order, &order, 1);
@@ -127,58 +146,50 @@ void calculatePrivateKeyFromSharedData(unsigned char d_i[], unsigned char shared
     // v_i_bn = v_i_bn % order + 1; // modulo order
     MBEDTLS_MPI_CHK(mbedtls_mpi_mod_mpi(&tmp_bn, &v_i_bn, &order));
     MBEDTLS_MPI_CHK(mbedtls_mpi_add_int(&tmp_bn, &tmp_bn, 1));
-    MBEDTLS_MPI_CHK( mbedtls_mpi_copy(&v_i_bn, &tmp_bn));
+    MBEDTLS_MPI_CHK(mbedtls_mpi_copy(&v_i_bn, &tmp_bn));
 
-    //  d_i_bn = (d_0_bn * u_i_bn) + v_i_bn;
-    MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary(&d_0_bn, privateKey, Private_Key_Size)); // load d_0_bn from privateKey
-    MBEDTLS_MPI_CHK(mbedtls_mpi_mul_mpi(&tmp_bn, &d_0_bn, &u_i_bn));                                 // tmp_bn = d_0_bn * u_i_bn
-    MBEDTLS_MPI_CHK(mbedtls_mpi_add_mpi(&d_i_bn, &tmp_bn, &v_i_bn));                                 // d_i_bn = tmp_bn + v_i_bn
+    // //  d_i_bn = (d_0_bn * u_i_bn) + v_i_bn;
+    // MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary(&d_0_bn, privateKey, Private_Key_Size)); // load d_0_bn from privateKey
+    // MBEDTLS_MPI_CHK(mbedtls_mpi_mul_mpi(&tmp_bn, &d_0_bn, &u_i_bn));                                 // tmp_bn = d_0_bn * u_i_bn
+    // MBEDTLS_MPI_CHK(mbedtls_mpi_add_mpi(&d_i_bn, &tmp_bn, &v_i_bn));                                 // d_i_bn = tmp_bn + v_i_bn
 
-    // normalize d_i_bn to order
-    MBEDTLS_MPI_CHK(mbedtls_mpi_copy(&order, &grp.N));              // reset order of (G) curve
-    MBEDTLS_MPI_CHK(mbedtls_mpi_mod_mpi(&d_i_bn, &d_i_bn, &order)); // d_i_bn = d_i_bn % order
+    // // normalize d_i_bn to order
+    // MBEDTLS_MPI_CHK(mbedtls_mpi_copy(&order, &ec->grp.N));              // reset order of (G) curve
+    // MBEDTLS_MPI_CHK(mbedtls_mpi_mod_mpi(&d_i_bn, &d_i_bn, &order)); // d_i_bn = d_i_bn % order
 
-    // return bytes of d_i_bn
-    size_t d_i_bn_size = mbedtls_mpi_size(&d_i_bn);
-    MBEDTLS_MPI_CHK(mbedtls_mpi_write_binary(&d_i_bn, d_i, d_i_bn_size));
+    // // return bytes of d_i_bn
+    // size_t d_i_bn_size = mbedtls_mpi_size(&d_i_bn);
+    // MBEDTLS_MPI_CHK(mbedtls_mpi_write_binary(&d_i_bn, d_i, d_i_bn_size));
+
+    // load uncompressed public key from publicKey into ec
+    printf("Loading public key...\n");
+    MBEDTLS_MPI_CHK(mbedtls_ecp_point_read_binary(&ec->grp, &ec->Q, publicKey, Uncompressed_Public_Key_Size));
+
+    // p_0 is uncompressed public key (x,y)
+    // p_i = (p_0 * u_i_bn) + (v_i_bn * G);
+
+
+
+
+    // // tmp_point_0 = p_0 * u_i_bn;
+    // MBEDTLS_MPI_CHK(mbedtls_ecp_mul(&ec->grp, &tmp_point_0, &u_i_bn, &ec->Q, mbedtls_ctr_drbg_random, &ctr_drbg));
+
+    // // tmp_point_1 = v_i_bn * G;
+    // MBEDTLS_MPI_CHK(mbedtls_ecp_mul(&ec->grp, &tmp_point_1, &v_i_bn, &ec->grp.G, mbedtls_ctr_drbg_random, &ctr_drbg));
+    printf("Generating new public key...\n");
+    // tmp_point_0 = (p_0 * u_i_bn) + (v_i_bn * G)
+    MBEDTLS_MPI_CHK(mbedtls_ecp_muladd(&ec->grp, &tmp_point_0,
+                                        &u_i_bn, &ec->Q,
+                                        &v_i_bn, &ec->grp.G));
+
+
+
+    // MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary(&ec->d, privateKey, Private_Key_Size));
+    // MBEDTLS_MPI_CHK(mbedtls_ecp_check_privkey(&ec->grp, &ec->d));
+    mbedtls_ecp_point_write_binary(&ec->grp, &tmp_point_0, MBEDTLS_ECP_PF_COMPRESSED, &dummy, p_i, Public_Key_Size);
 
     // unsigned char d_i_bn_data[d_i_bn_size];
     // mbedtls_mpi_write_binary( &d_i_bn, d_i_bn_data, d_i_bn_size );
-
-    cleanup:
-        mbedtls_mpi_free(&order);
-        mbedtls_mpi_free(&u_i_bn);
-        mbedtls_mpi_free(&v_i_bn);
-        mbedtls_mpi_free(&d_0_bn);
-        mbedtls_mpi_free(&d_i_bn);
-        mbedtls_mpi_free(&tmp_bn);
-        mbedtls_ecp_group_free(&grp);
-}
-
-void calculatePublicKeyFromPrivateKey(unsigned char publicKey[], unsigned char privateKey[])
-{
-    int ret = 1;
-    mbedtls_entropy_context entropy;
-    mbedtls_ctr_drbg_context ctr_drbg;
-    mbedtls_pk_context pk;
-    mbedtls_ecp_keypair *ec = malloc(sizeof(mbedtls_ecp_keypair));
-
-    mbedtls_ctr_drbg_init(&ctr_drbg);
-    mbedtls_entropy_init(&entropy);
-    mbedtls_pk_init(&pk);
-    mbedtls_ecp_keypair_init(ec);
-
-    //set seed for random number generator
-    MBEDTLS_MPI_CHK(mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy, (const unsigned char *)"N/$!eW9zD6oA#X*/35b%", 20));
-
-    mbedtls_ecp_group_id grp_id = CURVE224; // you need to convert this from the `TEE_ATTR_ECC_CURVE`
-    MBEDTLS_MPI_CHK(mbedtls_pk_setup(&pk, mbedtls_pk_info_from_type(MBEDTLS_PK_ECDSA)));
-    MBEDTLS_MPI_CHK(mbedtls_ecp_group_load(&ec->grp, grp_id));
-    MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary(&ec->d, privateKey, Private_Key_Size));
-    MBEDTLS_MPI_CHK(mbedtls_ecp_check_privkey(&ec->grp, &ec->d));
-    MBEDTLS_MPI_CHK(mbedtls_ecp_mul(&ec->grp, &ec->Q, &ec->d, &ec->grp.G, mbedtls_ctr_drbg_random, &ctr_drbg));
-
-    mbedtls_ecp_point_write_binary(&ec->grp, &ec->Q, MBEDTLS_ECP_PF_COMPRESSED, &dummy, publicKey, Public_Key_Size);
 
     cleanup:
         if (ret != 0)
@@ -189,13 +200,18 @@ void calculatePublicKeyFromPrivateKey(unsigned char publicKey[], unsigned char p
         mbedtls_pk_free(&pk);
         mbedtls_ctr_drbg_free(&ctr_drbg);
         mbedtls_entropy_free(&entropy);
+        mbedtls_ecp_point_free(&tmp_point_0);
+
+
+        mbedtls_mpi_free(&order);
+        mbedtls_mpi_free(&u_i_bn);
+        mbedtls_mpi_free(&v_i_bn);
+        mbedtls_mpi_free(&d_0_bn);
+        // mbedtls_mpi_free(&d_i_bn);
+        mbedtls_mpi_free(&tmp_bn);
 }
 
-
-
-
-
-void DeriveKeyPair(unsigned char publicKeyOutput[], unsigned char simetricKeyInputOutput[], unsigned char masterPrivateKey[])
+void DeriveKeyPair(unsigned char publicKeyOutput[], unsigned char simetricKeyInputOutput[], unsigned char InitialPublicKey[])
 {
 
     ///////////////////////////////////// (1) Derive Simetric Key ////////////////////////////////////////////////////
@@ -223,24 +239,15 @@ void DeriveKeyPair(unsigned char publicKeyOutput[], unsigned char simetricKeyInp
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    ///////////////////////////////////// (3) Calculate Private Key //////////////////////////////////////////////////
-    // d_i = PrivateKey_i
-    unsigned char d_i[Private_Key_Size];
-    // memset(d_i, '\0', Private_Key_Size);
-    calculatePrivateKeyFromSharedData(d_i, derivedAntiTrackingKeys, masterPrivateKey);
+    // ///////////////////////////////////// (3) & (4) Calculate new Public Key //////////////////////////////////////////
+    // // d_i = PrivateKey_i
+    // unsigned char d_i[Private_Key_Size];
+    // // memset(d_i, '\0', Private_Key_Size);
+    // calculatePrivateKeyFromSharedData(d_i, derivedAntiTrackingKeys, masterPrivateKey);
+    calculatePublicFromSharedData(publicKeyOutput, derivedAntiTrackingKeys, InitialPublicKey);
 
-    // mbedtls_printf("(3) Calculate Private Key: \n");
-    // print_hex(d_i, Private_Key_Size, true);
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    ///////////////////////////////////// (4) Calculate Public Key //////////////////////////////////////////////////
-    // unsigned char derivedPublicKey[Public_Key_Size];
-    // memset(derivedPublicKey, '\0', Public_Key_Size);
-    calculatePublicKeyFromPrivateKey(publicKeyOutput, d_i);
-
-    // mbedtls_printf("(4) DerivedPublicKey: \n");
-    // print_hex(publicKeyOutput, Public_Key_Size, true);
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // // mbedtls_printf("(3) Calculate Private Key: \n");
+    // // print_hex(d_i, Private_Key_Size, true);
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
