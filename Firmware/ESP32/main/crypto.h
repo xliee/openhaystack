@@ -39,14 +39,9 @@
 
 int mbedtls_ansi_x936_kdf(mbedtls_md_type_t md_type, size_t input_len, uint8_t input[], size_t shared_info_len, uint8_t shared_info[], size_t output_len, uint8_t output[]);
 
+void compressPublicKey(unsigned char* publicKey, unsigned char* compressedPublicKey);
 
-void calculatePrivateKeyFromSharedData(unsigned char d_i[], unsigned char sharedData[], unsigned char privateKey[]);
-
-
-void calculatePublicKeyFromPrivateKey(unsigned char publicKey[], unsigned char privateKey[], bool compressed);
-
-
-void DeriveKeyPair(unsigned char publicKeyOutput[], unsigned char simetricKeyInputOutput[], unsigned char masterPrivateKey[]);
+void DeriveKeyPair(unsigned char publicKeyOutput[], unsigned char simetricKeyInputOutput[], unsigned char InitialPublicKey[]);
 
 
 #endif

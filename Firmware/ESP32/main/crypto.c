@@ -211,6 +211,25 @@ void calculatePublicFromSharedData(unsigned char p_i[], unsigned char sharedData
         mbedtls_mpi_free(&tmp_bn);
 }
 
+void compressPublicKey(unsigned char* publicKey, unsigned char* compressedPublicKey)
+{
+    
+    mbedtls_ecp_keypair *ec = malloc(sizeof(mbedtls_ecp_keypair));
+    mbedtls_ecp_point p;
+    mbedtls_mpi d;
+    mbedtls_ctr_drbg_context ctr_drbg;
+    mbedtls_ctr_drbg_init(&ctr_drbg);
+    mbedtls_mpi_init(&d);
+    mbedtls_ecp_point_init(&p);
+    mbedtls_ecp_keypair_init(ec);
+    mbedtls_ecp_group_load(&ec->grp, CURVE224);
+    mbedtls_ecp_point_read_binary(&ec->grp, &ec->Q, publicKey, Uncompressed_Public_Key_Size);
+    mbedtls_ecp_point_write_binary(&ec->grp, &ec->Q, MBEDTLS_ECP_PF_COMPRESSED, &dummy, compressedPublicKey, Public_Key_Size);
+    mbedtls_ecp_keypair_free(ec);
+    mbedtls_ecp_point_free(&p);
+    mbedtls_mpi_free(&d);
+}
+
 void DeriveKeyPair(unsigned char publicKeyOutput[], unsigned char simetricKeyInputOutput[], unsigned char InitialPublicKey[])
 {
 

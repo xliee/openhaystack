@@ -49,8 +49,8 @@
 #include "airTagBT.h"
 #include "crypto.h"
 
-#define DELAY_IN_S 5
-#define RESET_INTERVAL 20
+#define DELAY_IN_S 20
+#define RESET_INTERVAL 90
 
 #if CONFIG_IDF_TARGET_ESP32
 #define TARGET_CRYPT_CNT_EFUSE  ESP_EFUSE_FLASH_CRYPT_CNT
@@ -93,6 +93,26 @@ int load_key(uint8_t *dst, size_t size, size_t offset, bool sk) {
     return status;
 }
 
+int write_key(uint8_t *dst, size_t size, size_t offset) {
+    const esp_partition_t *keypart = esp_partition_find_first(0x40, 0x00, "sk");
+    if (keypart == NULL) {
+        ESP_LOGE(LOG_TAG, "Could not find key partition");
+        return 1;
+    }
+    esp_err_t status;
+
+    status = esp_partition_erase_range(keypart, 0, keypart->size);
+    if (status != ESP_OK) {
+        ESP_LOGE(LOG_TAG, "Could not erase key from partition: %s", esp_err_to_name(status));
+        return 1;
+    }
+
+    status = esp_partition_write_raw(keypart, offset, dst, size);
+    if (status != ESP_OK) {
+        ESP_LOGE(LOG_TAG, "Could not read key from partition: %s", esp_err_to_name(status));
+    }
+    return status;
+}
 
 // int write_key(uint8_t *dst, size_t size, size_t offset) {
 //     const esp_partition_t *keypart = esp_partition_find_first(0x40, 0x00, "pk");
@@ -138,11 +158,11 @@ void app_main(void)
     // mbedtls_base64_decode(d_0, Private_Key_Size, &dummy, (const unsigned char *)d_0_b64, strlen((const char *)d_0_b64));
     // mbedtls_base64_decode(SK_0, Simetric_Key_Size, &dummy, (const unsigned char *)sk_0_b64, strlen((const char *)sk_0_b64));
 
-    mbedtls_printf("pk 0 (uncompressed): \n");
-    print_hex(pk_0, Uncompressed_Public_Key_Size, true);
+    mbedtls_printf("pk 0 (uncompressed): \n0x");
+    print_hex(pk_0, Uncompressed_Public_Key_Size, false);
 
-    mbedtls_printf("sk: \n");
-    print_hex(SK_0, Simetric_Key_Size, true);
+    mbedtls_printf("sk: \n0x");
+    print_hex(SK_0, Simetric_Key_Size, false);
 
 
 
@@ -158,6 +178,9 @@ void app_main(void)
 
     unsigned char derivedSymetricKey[Simetric_Key_Size];
     unsigned char derivedPublicKey[Public_Key_Size];
+
+    // compressPublicKey(pk_0, derivedPublicKey);
+
     unsigned char derivedAdvertismentKey[Advertisement_Key_Size];
     // copy initial simetric key to derivedSymetricKey
     memcpy(derivedSymetricKey, SK_0, Simetric_Key_Size);
@@ -174,13 +197,19 @@ void app_main(void)
 
 
         printf("\nIteration %d \n", count);
-        if(count == 0 || count % RESET_INTERVAL == 0){
+        if((count % RESET_INTERVAL == 0)){ // count>1 &&
             printf("\nDeriving New Keys... \n");
             DeriveKeyPair(derivedPublicKey, derivedSymetricKey, pk_0);
             // calculate advertisement key for bluetooth
+            printf("SK: 0x");
+            print_hex(derivedSymetricKey, Simetric_Key_Size, false);
             memcpy(derivedAdvertismentKey, &derivedPublicKey[1], Advertisement_Key_Size);
             printf("PK: 0x");
             print_hex(derivedPublicKey, Public_Key_Size, false);
+            
+            write_key(derivedSymetricKey, Simetric_Key_Size, 0); // write sk to partition
+            printf("SK partition Updated. \n");
+
         }
 
 

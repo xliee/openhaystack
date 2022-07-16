@@ -38,8 +38,17 @@ Use the `flash_esp32.sh` script to deploy the firmware and a public key to an ES
 ```bash
 flash.bat PORT "base64 simetric key" "base64 uncompressed public key"
 
+or to reflash Keys ONLY
+
+flash_Keys_ONLY.bat PORT "base64 simetric key" "base64 uncompressed public key"
+
 e.g.
 flash.bat COM6 "C4XtRo98PhhzO9V/jwwIPprCjxk3mSn+O+gRIG7unWc=" "BBX8cYk9jDdMRRuty8kTyJHelSPhYAfgGDMI4Kb88Nl9PTshm7nBZY1/FowHEHJ6b61Y7HkXhSdh"
+
+--
+
+flash_Keys_ONLY.bat COM6 "C4XtRo98PhhzO9V/jwwIPprCjxk3mSn+O+gRIG7unWc=" "BBX8cYk9jDdMRRuty8kTyJHelSPhYAfgGDMI4Kb88Nl9PTshm7nBZY1/FowHEHJ6b61Y7HkXhSdh"
+
 
 ```
 
